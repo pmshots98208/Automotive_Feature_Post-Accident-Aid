@@ -1,0 +1,85 @@
+/*@!Encoding:1252*/
+includes
+{
+  
+}
+
+variables
+{
+  int temp1,temp2;
+}
+
+void MainTest()//Entry point for the test Module code
+{
+  testModuleTitle("Post Accident Aid Report");
+testModuleDescription("This is a system in which if any accident happens then after accident post aid will be given instantly, sometimes passenger is not in councious mode so it will be a automatic process");
+testReportAddEngineerInfo("Name - Priyanshu Mishra ", "Organization = LTTS");
+    testReportAddEngineerInfo("Employee ID","40020833");
+  testReportAddEngineerInfo("Reports to","Thrilochan Sharma");
+  
+  testModuleDescription("     1.The Test Features of CANoe");
+  testModuleDescription("     2.The implementation of Testcases");
+  testModuleDescription("     3.Analysis of Testcase Verdicts");
+  
+  
+  //Calling of test cases
+  testcase1();
+  testcase2();
+}
+
+//Verification of Ignition
+testcase testcase1()
+{
+  //Ignition is 1 when a msg is recieved
+  temp1=testWaitForMessage(Force_Inp, 10000);
+  if(temp1==1)
+  {
+    if(@Ignition::KL_15==1)
+    {
+        //Correct execution scenario
+      write("Ignition on message is recieved");
+      testStepPass("Message is received when ignition is on");
+    }
+    else
+    {
+      //Error scenario
+      testStepPass("Message is received but ignition is on");
+    }
+    
+  }
+  else
+  {
+    write("Message has not recieved");
+    //warning scenario
+    testStepWarning("Message is not been recieved");
+  }
+  
+}
+
+testcase testcase2()
+{
+  //Ignition is 1 when a msg is recieved
+  temp2=testWaitForMessage(Alert_System, 10000);
+  if(temp2==1)
+  {
+    if(@Ignition::KL_15==1)
+    {
+        //Correct execution scenario
+      write("Ignition on message is recieved");
+      testStepPass("Message is received when ignition is on");
+    }
+    else
+    {
+      //Error scenarsio
+      testStepPass("Message is received but ignition is on");
+    }
+    
+  }
+  else
+  {
+    write("Message has not recieved");
+    //warning scenario
+    testStepWarning("Message is not been recieved");
+  }
+  
+}

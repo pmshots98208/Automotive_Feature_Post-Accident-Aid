@@ -1,0 +1,35 @@
+/*@!Encoding:1252*/
+includes
+{
+  
+}
+
+variables
+{
+ timer timer3; 
+}
+
+on message Alert_System 
+{
+  if ($Siren_Data == 1)
+  {
+    setTimer(timer3,2);
+    write("Dear hospital please reach to this location, it is emergency");
+    write("Calling Ambulance");
+    write("Call is going to your father");
+  }
+  else
+  {
+    write("You are safe");
+  }
+  
+}
+
+  
+    on timer timer3
+    {
+      $Contact_Call = 1;
+      $Ambulance_Call = 1;
+     
+    }
+    

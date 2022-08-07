@@ -1,0 +1,32 @@
+/*@!Encoding:1252*/
+includes
+{
+  
+}
+
+variables
+{
+  
+  message Alert_System data2;
+}
+
+on message Force_Inp
+{
+  if ($Force_Data == 1)
+  {
+    $Siren_Data = 1;
+    write("HELP");
+    output(data2);
+   
+  }
+  else
+  {
+    write("You are safe");
+  }
+}    
+    
+
+      
+  
+
+

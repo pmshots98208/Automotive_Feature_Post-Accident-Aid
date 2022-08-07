@@ -1,0 +1,65 @@
+/*@!Encoding:1252*/
+includes
+{
+  
+}
+
+variables
+{
+  timer timer1, timer2;
+  message Force_Inp data1;
+}
+ 
+on start 
+{
+  write("Simulation Started");
+}
+
+on stopMeasurement
+{
+  write("Simulation Stop");
+}
+
+on sysvar Ignition::KL_15
+{
+  if (@Ignition::KL_15 ==1)
+  {
+    write("Ignition is on");
+    setTimer(timer1,2);
+  }
+  else
+  {
+   write("Ignition is off");
+    cancelTimer(timer1);
+     cancelTimer(timer2);
+  }
+}
+
+on timer timer1
+{
+  $Force_Data = 0;
+  output(data1);
+  write("Accident did not happened, you are safe");
+  setTimer(timer2,1);
+}
+
+on timer timer2
+{
+  $Force_Data = 1;
+  output(data1);
+  write("Accident happened, you are not safe");
+  setTimer(timer1,1);
+}
+on key 'i'
+{
+  if(@Ignition::KL_15==0)
+  {
+    @Ignition::KL_15 =1;
+    write("Ignition is ON");
+  }
+  else
+  {
+     @Ignition::KL_15 =0;
+    write("Ignition is OFF");
+  }
+}
